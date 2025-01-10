@@ -30,16 +30,16 @@ cookie = driver.find_element(By.ID, cookie_id)
 
 while True:
     cookie.click()
-    cookies_count = driver.find_element(By.ID, cookies_id).text.split(" ")[0]
-    cookies_count = int(cookies_count.replace((","), ("")))
+    cookies_count = driver.find_element(By.ID, cookies_id).text.split(" ")[0].split("/")[0]
+    cookies_count = float(cookies_count.replace((","), ("")))
     
-    for i in range(4):
+    for i in range(5):
         product_price = driver.find_element(By.ID, product_price_prefix + str(i)).text.replace((","), (""))
 
         if not product_price.isdigit():
             continue
 
-        product_price = int(product_price)
+        product_price = float(product_price)
 
         if cookies_count >= product_price:
             product = driver.find_element(By.ID, product_prefix + str(i))
